@@ -1,5 +1,6 @@
 package pl.wojtokuba.proj.Utils;
 
+import pl.wojtokuba.proj.Storage.SessionStorage;
 import pl.wojtokuba.proj.Storage.UserStorage;
 
 import java.util.HashMap;
@@ -14,8 +15,10 @@ public class SimpleInjector {
         if(_isInitialized)
             return;
         Object[] objects = new Object[]{
+                new TimeLapseManager(),
                 new MainViewManager(),
                 new UserStorage(),
+                new SessionStorage(),
         };
         for (int i = 0; i < objects.length; ++i) {
             argClasses.put(objects[i].getClass().getName(), objects[i]);
