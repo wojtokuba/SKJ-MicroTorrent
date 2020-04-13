@@ -12,10 +12,35 @@ public class User {
     private SystemRoles permissions;
     private String username;
 
+    public User(String username, SystemRoles permissions){
+        this.id = count.incrementAndGet();
+        this.permissions = permissions;
+        this.username = username;
+    }
+
     public User(String username){
         this.id = count.incrementAndGet();
         this.permissions = SystemRoles.TENANT;
         this.username = username;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public SystemRoles getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(SystemRoles permissions) {
+        this.permissions = permissions;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }
