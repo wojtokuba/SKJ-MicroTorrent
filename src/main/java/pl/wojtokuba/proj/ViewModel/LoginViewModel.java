@@ -11,6 +11,8 @@ public class LoginViewModel {
     public LoginViewModel(LoginWindow loginWindow){
         this.loginWindow = loginWindow;
     }
+
+
     public void LoginUser(){
         loginWindow.setErrorMessage("");
         User logged = userStorage.findOneByUsername(loginWindow.getUsername());

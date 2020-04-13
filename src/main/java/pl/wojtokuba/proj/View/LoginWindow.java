@@ -21,12 +21,12 @@ public class LoginWindow extends AbstractWindow {
     Label errorMessage = new Label("");
     TextBox userLogin = new TextBox();
 
-    public LoginWindow(){
+    public LoginWindow() {
         super("Logowanie");
         loginViewModel = new LoginViewModel(this);
         mainViewManager = (MainViewManager) SimpleInjector.resolveObject(MainViewManager.class);
         contentPanel = new Panel(new GridLayout(4));
-        gridLayout = (GridLayout)contentPanel.getLayoutManager();
+        gridLayout = (GridLayout) contentPanel.getLayoutManager();
         gridLayout.setHorizontalSpacing(10);
         gridLayout.setVerticalSpacing(1);
         contentPanel.addComponent(new Label("PJATK Developer Soft by Jakub Wojtowicz <s20912>").addStyle(SGR.BOLD)
@@ -63,7 +63,7 @@ public class LoginWindow extends AbstractWindow {
                         .setLayoutData(
                                 GridLayout.createHorizontallyFilledLayoutData(4)));
 
-        contentPanel.addComponent(errorMessage.addStyle(SGR.BLINK).setForegroundColor(new TextColor.RGB(255,0,0))
+        contentPanel.addComponent(errorMessage.addStyle(SGR.BLINK).setForegroundColor(new TextColor.RGB(255, 0, 0))
                 .setLayoutData(GridLayout.createLayoutData(
                         GridLayout.Alignment.CENTER,
                         GridLayout.Alignment.END,
@@ -87,11 +87,11 @@ public class LoginWindow extends AbstractWindow {
         mainViewManager.getWindowBasedTextGUI().addWindowAndWait(this);
     }
 
-    public String getUsername(){
+    public String getUsername() {
         return this.userLogin.getText();
     }
 
-    public void setErrorMessage(String message){
+    public void setErrorMessage(String message) {
         this.errorMessage.setText(message);
     }
 }
