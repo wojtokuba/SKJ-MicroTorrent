@@ -1,11 +1,15 @@
 package pl.wojtokuba.proj.Storage;
 
+import com.googlecode.lanterna.gui2.Window;
 import pl.wojtokuba.proj.Model.User;
+import pl.wojtokuba.proj.Utils.MainViewManager;
+import pl.wojtokuba.proj.Utils.SimpleInjector;
+import pl.wojtokuba.proj.View.LoginWindow;
 
 
 public class SessionStorage {
     private User loggedInUser = null;
-
+    private MainViewManager mainViewManager = (MainViewManager) SimpleInjector.resolveObject(MainViewManager.class);
     public SessionStorage(){
 
     }
@@ -15,8 +19,10 @@ public class SessionStorage {
         return this;
     }
 
-    public SessionStorage logout() {
+    public SessionStorage logout(MainViewManager viewManager) {
         this.loggedInUser = null;
+        viewManager.getWindowBasedTextGUI().getWindows().forEach(Window::close);
+        new LoginWindow();
         return this;
     }
 

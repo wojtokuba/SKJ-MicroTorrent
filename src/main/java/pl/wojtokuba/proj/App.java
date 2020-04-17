@@ -17,7 +17,7 @@ public class App {
         prepareToStop();
     }
 
-    private static void prepareToStop(){
+    public static void prepareToStop(){
         TimeLapseManager timeLapseManager = (TimeLapseManager) SimpleInjector.resolveObject(TimeLapseManager.class);
         if(timeLapseManager != null)
             timeLapseManager.end();
