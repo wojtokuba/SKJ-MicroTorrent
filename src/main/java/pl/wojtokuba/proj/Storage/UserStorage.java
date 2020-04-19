@@ -8,29 +8,14 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class UserStorage {
-    private HashMap<Integer, User> users = new HashMap<>();
-    private Set<String> uniqueUsername = new HashSet<>();
-
-    public UserStorage(){
-        MockUsers();
-    }
+    private final HashMap<Integer, User> users = new HashMap<>();
+    private final Set<String> uniqueUsername = new HashSet<>();
 
     public UserStorage push(User user) throws EntityNotUniqueException {
         if(uniqueUsername.contains(user.getUsername()))
             throw new EntityNotUniqueException();
         this.users.put(user.getId(), user);
         return this;
-    }
-
-    public void MockUsers(){
-        try {
-            System.out.println("MOCKING SYSTEM USERS: dev, ten1, ten2!!!");
-            this.push(new User("dev", SystemRoles.DEVELOPER));
-            this.push(new User("ten1", SystemRoles.TENANT));
-            this.push(new User("ten2", SystemRoles.TENANT));
-        } catch (EntityNotUniqueException e){
-            e.fillInStackTrace();
-        }
     }
 
     public boolean drop(User user){

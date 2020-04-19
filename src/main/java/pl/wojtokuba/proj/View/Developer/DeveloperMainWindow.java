@@ -1,53 +1,85 @@
 package pl.wojtokuba.proj.View.Developer;
 
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.*;
-import com.googlecode.lanterna.gui2.dialogs.ListSelectDialog;
+import com.googlecode.lanterna.gui2.menu.MenuBar;
 import pl.wojtokuba.proj.Commands.AppExit;
+import pl.wojtokuba.proj.Commands.Developer.CreateNewEstate;
+import pl.wojtokuba.proj.Commands.Developer.OpenMyBlocks;
 import pl.wojtokuba.proj.Commands.Developer.OpenMyEstates;
 import pl.wojtokuba.proj.Commands.Logout;
-import pl.wojtokuba.proj.Commands.OpenMenuOption;
-import pl.wojtokuba.proj.Components.AppInfoNavbar;
-import pl.wojtokuba.proj.Components.AppNavbar;
-import pl.wojtokuba.proj.Utils.MainViewManager;
-import pl.wojtokuba.proj.Utils.SimpleInjector;
+import pl.wojtokuba.proj.Components.NavBarMenu;
+import pl.wojtokuba.proj.View.BaseWindow;
+import pl.wojtokuba.proj.View.WindowDrawable;
 import pl.wojtokuba.proj.ViewModel.Developer.DeveloperMainViewModel;
 
-import java.util.Arrays;
+import java.util.HashMap;
 
-public class DeveloperMainWindow extends AbstractWindow {
+public class DeveloperMainWindow extends BaseWindow {
 
-    MainViewManager mainViewManager;
-    Panel contentPanel;
-    GridLayout borderLayout;
     DeveloperMainViewModel developerMainViewModel;
 
-    public DeveloperMainWindow() {
-        super("Deweloper");
-        setHints(Arrays.asList(Hint.FIT_TERMINAL_WINDOW, Hint.FULL_SCREEN, Hint.NO_DECORATIONS));
+    public DeveloperMainWindow(String windowTitle) {
+        super(windowTitle);
         developerMainViewModel = new DeveloperMainViewModel(this);
-        mainViewManager = (MainViewManager) SimpleInjector.resolveObject(MainViewManager.class);
-        contentPanel = new Panel(new GridLayout(10));
-        borderLayout = (GridLayout) contentPanel.getLayoutManager();
-        setComponent(contentPanel);
-        contentPanel.addComponent(new AppInfoNavbar());
-        contentPanel.addComponent(new Separator(Direction.HORIZONTAL)
-                .setLayoutData(GridLayout.createLayoutData(
-                        GridLayout.Alignment.FILL,
-                        GridLayout.Alignment.FILL,
-                        true,
-                        false,
-                        10,
-                        1)
-                ));
-        ActionListBox menu = new AppNavbar();
-        menu.addItem("Moje Osiedla", new OpenMyEstates());
-        menu.addItem("Moje Budynki", new OpenMyEstates());
-        menu.addItem("Moje mieszkania", new OpenMyEstates());
-        menu.addItem("Płatności", new OpenMyEstates());
-        menu.addItem("Wyloguj", new Logout());
-        menu.addItem("Zakończ", new AppExit());
-        contentPanel.addComponent(menu);
-        mainViewManager.getWindowBasedTextGUI().addWindowAndWait(this);
+    }
+
+    public DeveloperMainWindow(){
+        super("Deweloper");
+        developerMainViewModel = new DeveloperMainViewModel(this);
+    }
+
+    @Override
+    public void render() {
+
+    }
+
+    @Override
+    public void drawWindow(){
+        MenuBar menuBar = new MenuBar();
+        new NavBarMenu("Osiedla",
+                new HashMap<>(){{
+                    put("Lista", new OpenMyEstates());
+                    put("Dodaj Nowe", new CreateNewEstate());
+                }},
+                menuBar
+        );
+        new NavBarMenu("Budynki",
+                new HashMap<>(){{
+                    put("Lista", new OpenMyBlocks());
+                    put("Dodaj Nowy", new OpenMyEstates());
+                }},
+                menuBar
+        );
+        new NavBarMenu("Mieszkania",
+                new HashMap<>(){{
+                    put("Lista", new OpenMyEstates());
+                    put("Dodaj Nowe", new OpenMyEstates());
+                }},
+                menuBar
+        );
+        new NavBarMenu("Wynajem",
+                new HashMap<>(){{
+                    put("Nowy wynajem", new OpenMyEstates());
+                    put("Aktywne Najmy", new OpenMyEstates());
+                    put("Najemcy", new OpenMyEstates());
+                }},
+                menuBar
+        );
+        new NavBarMenu("System",
+                new HashMap<>(){{
+                    put("Zakończ", new AppExit());
+                    put("Wyloguj", new Logout());
+                }},
+                menuBar
+        );
+        menuBar.setLayoutData(GridLayout.createLayoutData(GridLayout.Alignment.FILL,
+                GridLayout.Alignment.BEGINNING,
+                true,
+                false,
+                10,
+                1));
+        contentPanel.addComponent(menuBar);
     }
 
 }

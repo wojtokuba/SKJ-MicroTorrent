@@ -6,9 +6,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 //For code quality purposes class naming changed from Osoba to User
 public class User {
-    private static final AtomicInteger count = new AtomicInteger(1);
+    private static final AtomicInteger count = new AtomicInteger(0);
 
-    private int id;
+    private final int id;
     private SystemRoles permissions;
     private String username;
 

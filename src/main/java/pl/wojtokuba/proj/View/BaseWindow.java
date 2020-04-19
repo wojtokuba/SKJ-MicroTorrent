@@ -1,27 +1,36 @@
-package pl.wojtokuba.proj.View.Tenant;
+package pl.wojtokuba.proj.View;
 
 import com.googlecode.lanterna.gui2.*;
-import pl.wojtokuba.proj.Commands.AppExit;
-import pl.wojtokuba.proj.Commands.Developer.OpenMyEstates;
-import pl.wojtokuba.proj.Commands.Logout;
 import pl.wojtokuba.proj.Components.AppInfoNavbar;
 import pl.wojtokuba.proj.Utils.MainViewManager;
 import pl.wojtokuba.proj.Utils.SimpleInjector;
-import pl.wojtokuba.proj.ViewModel.Developer.DeveloperMainViewModel;
-import pl.wojtokuba.proj.ViewModel.Tenant.TenantMainViewModel;
 
 import java.util.Arrays;
 
-public class TenantMainWindow extends AbstractWindow {
+public abstract class BaseWindow extends AbstractWindow implements WindowRenderable, WindowDrawable {
 
-    MainViewManager mainViewManager;
-    Panel contentPanel;
-    GridLayout borderLayout;
-    TenantMainViewModel tenantMainViewModel;
+    public MainViewManager mainViewManager;
+    public Panel contentPanel;
+    public GridLayout borderLayout;
 
-    public TenantMainWindow() {
-        super("Najemca");
-        tenantMainViewModel = new TenantMainViewModel(this);
+    public BaseWindow(String windowTitle) {
+        super(windowTitle);
+        drawBasis();
+        drawWindow();
+        render();
+        mainViewManager.getWindowBasedTextGUI().addWindowAndWait(this);
+    }
+    public BaseWindow(){
+        super();
+        drawBasis();
+        drawWindow();
+        render();
+        mainViewManager.getWindowBasedTextGUI().addWindowAndWait(this);
+
+    }
+
+    private void drawBasis(){
+        setHints(Arrays.asList(Hint.NO_DECORATIONS, Hint.FULL_SCREEN));
         mainViewManager = (MainViewManager) SimpleInjector.resolveObject(MainViewManager.class);
         contentPanel = new Panel(new GridLayout(10));
         borderLayout = (GridLayout) contentPanel.getLayoutManager();
@@ -36,7 +45,7 @@ public class TenantMainWindow extends AbstractWindow {
                         10,
                         1)
                 ));
-        mainViewManager.getWindowBasedTextGUI().addWindowAndWait(this);
     }
-
+    public abstract void render();
+    public abstract void drawWindow();
 }

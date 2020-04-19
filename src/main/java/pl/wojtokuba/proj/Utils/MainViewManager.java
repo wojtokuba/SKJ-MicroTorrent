@@ -4,7 +4,6 @@ import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.gui2.WindowBasedTextGUI;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import pl.wojtokuba.proj.Keystrokes.ExitKeyStrokeListener;
 
 import java.io.IOException;
 

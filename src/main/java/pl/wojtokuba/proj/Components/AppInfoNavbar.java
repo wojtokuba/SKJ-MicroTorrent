@@ -10,10 +10,15 @@ import pl.wojtokuba.proj.Utils.SimpleInjector;
 import pl.wojtokuba.proj.Utils.SystemRoles;
 
 public class AppInfoNavbar extends Label {
-    private static SessionStorage sessionStorage = (SessionStorage) SimpleInjector.resolveObject(SessionStorage.class);
+    private static final SessionStorage sessionStorage = (SessionStorage) SimpleInjector.resolveObject(SessionStorage.class);
     public AppInfoNavbar(){
         super("Zalogowany jako: "+ sessionStorage.getLoggedInUser().getUsername() + " | " + (sessionStorage.getLoggedInUser().getPermissions() == SystemRoles.DEVELOPER ? "Deweloper" : "Lokator"));
-        setLayoutData(GridLayout.createLayoutData(GridLayout.Alignment.FILL, GridLayout.Alignment.FILL, true, false, 10, 1));
+        setLayoutData(GridLayout.createLayoutData(GridLayout.Alignment.CENTER,
+                GridLayout.Alignment.FILL,
+                true,
+                false,
+                10,
+                1));
         addStyle(SGR.BOLD);
     }
 }

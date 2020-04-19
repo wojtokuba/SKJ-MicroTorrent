@@ -1,7 +1,6 @@
 package pl.wojtokuba.proj.Utils;
 
-import pl.wojtokuba.proj.Storage.SessionStorage;
-import pl.wojtokuba.proj.Storage.UserStorage;
+import pl.wojtokuba.proj.Storage.*;
 
 import java.util.HashMap;
 import java.util.logging.Logger;
@@ -19,6 +18,9 @@ public class SimpleInjector {
                 new MainViewManager(),
                 new UserStorage(),
                 new SessionStorage(),
+                new EstateStorage(),
+                new BlockStorage(),
+                new FlatStorage(),
         };
         for (int i = 0; i < objects.length; ++i) {
             argClasses.put(objects[i].getClass().getName(), objects[i]);

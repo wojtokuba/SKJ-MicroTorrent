@@ -9,10 +9,7 @@ import pl.wojtokuba.proj.View.LoginWindow;
 
 public class SessionStorage {
     private User loggedInUser = null;
-    private MainViewManager mainViewManager = (MainViewManager) SimpleInjector.resolveObject(MainViewManager.class);
-    public SessionStorage(){
-
-    }
+    private final MainViewManager mainViewManager = (MainViewManager) SimpleInjector.resolveObject(MainViewManager.class);
 
     public SessionStorage login(User user) {
         this.loggedInUser = user;
