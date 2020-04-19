@@ -12,6 +12,10 @@ public class Flat {
     private static final AtomicInteger count = new AtomicInteger(0);
     private final int id;
     private Block block;
+    private String localNo;
+    private float surface;
+
+
     public Flat(){
         this.id = count.incrementAndGet();
     }
@@ -26,6 +30,24 @@ public class Flat {
 
     public Flat setBlock(Block block) {
         this.block = block;
+        return this;
+    }
+
+    public String getLocalNo() {
+        return localNo;
+    }
+
+    public Flat setLocalNo(String localNo) {
+        this.localNo = localNo;
+        return this;
+    }
+
+    public float getSurface() {
+        return surface;
+    }
+
+    public Flat setSurface(float surface) {
+        this.surface = surface;
         return this;
     }
 }

@@ -17,7 +17,6 @@ public class AppExit implements Runnable {
     public void run() {
 
         mainViewManager.getWindowBasedTextGUI().getWindows().forEach(Window::close);
-        App.prepareToStop();
         try {
             mainViewManager.getScreen().close();
         } catch (IOException e) {

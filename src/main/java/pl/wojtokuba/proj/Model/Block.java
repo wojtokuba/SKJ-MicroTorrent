@@ -47,4 +47,9 @@ public class Block {
             return flatStorage.findByBlock(this);
         return new ArrayList<>();
     }
+
+    @Override
+    public String toString() {
+        return getAddress() + ", " +getEstate().getName();
+    }
 }

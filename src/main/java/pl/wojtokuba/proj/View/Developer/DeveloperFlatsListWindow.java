@@ -8,17 +8,18 @@ import com.googlecode.lanterna.gui2.Label;
 import com.googlecode.lanterna.gui2.Separator;
 import pl.wojtokuba.proj.Components.CustomTable;
 import pl.wojtokuba.proj.Model.Block;
+import pl.wojtokuba.proj.Model.Flat;
 import pl.wojtokuba.proj.View.WindowRenderable;
-import pl.wojtokuba.proj.ViewModel.Developer.DeveloperBlocksListViewModel;
+import pl.wojtokuba.proj.ViewModel.Developer.DeveloperFlatsListViewModel;
 
-public class DeveloperBlocksListWindow extends DeveloperMainWindow implements WindowRenderable {
+public class DeveloperFlatsListWindow extends DeveloperMainWindow implements WindowRenderable {
 
-    DeveloperBlocksListViewModel developerBlocksListViewModel;
+    DeveloperFlatsListViewModel developerFlatsListViewModel;
 
     @Override
     public void render() {
-        developerBlocksListViewModel = new DeveloperBlocksListViewModel(this);
-        contentPanel.addComponent(new Label("MOJE BLOKI")
+        developerFlatsListViewModel = new DeveloperFlatsListViewModel(this);
+        contentPanel.addComponent(new Label("MOJE MIESZKANIA")
                 .addStyle(SGR.BOLD)
                 .setForegroundColor(TextColor.ANSI.BLUE)
                 .setLayoutData(GridLayout.createLayoutData(
@@ -31,9 +32,15 @@ public class DeveloperBlocksListWindow extends DeveloperMainWindow implements Wi
                 new Separator(Direction.HORIZONTAL)
                         .setLayoutData(
                                 GridLayout.createHorizontallyFilledLayoutData(10)));
-        CustomTable<String> table = new CustomTable<>("ID", "Adres", "Nazwa osiedla", "Liczba mieszkań");
-        for (Block block : developerBlocksListViewModel.getBlocks()) {
-            table.getTableModel().addRow(String.valueOf(block.getId()), block.getAddress(), block.getEstate().getName(), String.valueOf(block.getFlats().size()));
+        CustomTable<String> table = new CustomTable<>("ID", "Adres", "Osiedle", "Powierzchnia");
+        for (Flat flat : developerFlatsListViewModel.getFlats()) {
+            table.getTableModel().addRow(
+                    String.valueOf(flat.getId()),
+                    flat.getBlock().getAddress() + "/" + flat.getLocalNo(),
+                    flat.getBlock().getEstate().toString(),
+                    flat.getSurface() +" m³"
+
+            );
         }
         contentPanel.addComponent(table);
     }

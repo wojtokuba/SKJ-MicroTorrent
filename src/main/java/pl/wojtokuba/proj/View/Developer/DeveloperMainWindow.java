@@ -4,9 +4,7 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.gui2.menu.MenuBar;
 import pl.wojtokuba.proj.Commands.AppExit;
-import pl.wojtokuba.proj.Commands.Developer.CreateNewEstate;
-import pl.wojtokuba.proj.Commands.Developer.OpenMyBlocks;
-import pl.wojtokuba.proj.Commands.Developer.OpenMyEstates;
+import pl.wojtokuba.proj.Commands.Developer.*;
 import pl.wojtokuba.proj.Commands.Logout;
 import pl.wojtokuba.proj.Components.NavBarMenu;
 import pl.wojtokuba.proj.View.BaseWindow;
@@ -47,14 +45,14 @@ public class DeveloperMainWindow extends BaseWindow {
         new NavBarMenu("Budynki",
                 new HashMap<>(){{
                     put("Lista", new OpenMyBlocks());
-                    put("Dodaj Nowy", new OpenMyEstates());
+                    put("Dodaj Nowy", new CreateNewBlock());
                 }},
                 menuBar
         );
         new NavBarMenu("Mieszkania",
                 new HashMap<>(){{
-                    put("Lista", new OpenMyEstates());
-                    put("Dodaj Nowe", new OpenMyEstates());
+                    put("Lista", new OpenMyFlats());
+                    put("Dodaj Nowe", new CreateNewFlat());
                 }},
                 menuBar
         );

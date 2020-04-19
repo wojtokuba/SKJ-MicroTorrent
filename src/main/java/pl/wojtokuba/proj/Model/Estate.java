@@ -45,4 +45,9 @@ public class Estate {
             return blockStorage.findByEstate(this);
         return new ArrayList<>();
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

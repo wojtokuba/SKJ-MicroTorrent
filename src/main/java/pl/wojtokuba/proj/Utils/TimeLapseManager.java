@@ -24,14 +24,14 @@ public class TimeLapseManager implements Runnable{
         timeThread = new Thread(this);
         timeThread.start();
         appDate = new Date();
-        System.out.println("Setting date to: " + dateFormat.format(appDate));
+        LoggerUtil.getLogger().fine("Setting date to: " + dateFormat.format(appDate));
         //queue checking rential dates
         queue.add(new CheckRentialDatesCommand());
     }
 
     public void end(){
         isFinishPlanned = true;
-        System.out.println("Time thread is planned for stop...");
+        LoggerUtil.getLogger().fine("Time thread is planned for stop...");
     }
 
     //queue is executed every 10 seconds.
@@ -41,7 +41,7 @@ public class TimeLapseManager implements Runnable{
                 //execute every command in new thread in order not to change time distances
                 new Thread(command).start();
             }
-            System.out.println("Running check crons");
+            LoggerUtil.getLogger().fine("Running check crons");
             everyTenSecs = 0;
         }
         everyTenSecs++;
@@ -54,7 +54,7 @@ public class TimeLapseManager implements Runnable{
             c.setTime(appDate);
             c.add(Calendar.DAY_OF_MONTH, 1);
             appDate = c.getTime();
-            System.out.println("Time lapses, new day has begun: " + dateFormat.format(appDate));
+            LoggerUtil.getLogger().fine("Time lapses, new day has begun: " + dateFormat.format(appDate));
             everyFiveSecs = 0;
         }
         everyFiveSecs++;
