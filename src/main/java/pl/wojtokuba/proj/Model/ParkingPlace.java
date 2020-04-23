@@ -38,8 +38,14 @@ public class ParkingPlace {
         return items;
     }
 
-    public void setItem(Vehicle vehicle) {
+    public ParkingPlace setItem(Vehicle vehicle) {
         this.items.put(vehicle.getId(), vehicle);
+        return this;
+    }
+
+    public ParkingPlace resetItems(){
+        this.items = new HashMap<>();
+        return this;
     }
 }
 

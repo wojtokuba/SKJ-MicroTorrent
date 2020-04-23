@@ -58,7 +58,7 @@ public class DeveloperMainWindow extends BaseWindow {
         );
         new NavBarMenu("Wynajem",
                 new HashMap<>(){{
-                    put("Aktywne Najmy", new OpenMyRentials());
+                    put("Historia wynajmów", new OpenMyRentials());
                     put("Nowy wynajem", new CreateNewRential());
                     put("Nowy najemca", new CreateNewRentalUser());
                 }},

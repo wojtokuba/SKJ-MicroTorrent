@@ -21,14 +21,17 @@ public class TimeLapseManager implements Runnable{
     private static int everyTenSecs = 0;
 
     public TimeLapseManager(){
+
+    }
+
+    public void start(){
         timeThread = new Thread(this);
-        timeThread.start();
         appDate = new Date();
         LoggerUtil.getLogger().fine("Setting date to: " + dateFormat.format(appDate));
         //queue checking rential dates
         queue.add(new CheckRentialDatesCommand());
+        timeThread.start();
     }
-
     public void end(){
         isFinishPlanned = true;
         LoggerUtil.getLogger().fine("Time thread is planned for stop...");

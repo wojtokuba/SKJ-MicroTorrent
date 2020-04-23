@@ -9,6 +9,7 @@ import pl.wojtokuba.proj.Storage.UserStorage;
 import pl.wojtokuba.proj.Utils.*;
 import pl.wojtokuba.proj.View.LoginWindow;
 
+import java.sql.Time;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,6 +24,9 @@ public class App {
 
         //setup IoC injector
         SimpleInjector.Setup();
+        TimeLapseManager timeLapseManager = (TimeLapseManager)SimpleInjector.resolveObject(TimeLapseManager.class);
+        assert timeLapseManager != null;
+        timeLapseManager.start();
         mockData();
         //initialize first, default window
         new LoginWindow();

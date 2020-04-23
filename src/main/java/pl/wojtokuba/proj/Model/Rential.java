@@ -16,11 +16,12 @@ public class Rential implements Comparable<Rential> {
     private boolean isParkingRent;
     private final Timestamp rentAt;
     private Timestamp rentEnd;
-
+    private boolean archived;
     public Rential(){
         this.id = count.incrementAndGet();
         this.rentAt = new Timestamp(System.currentTimeMillis());
         this.companions = new HashMap<>();
+        this.archived = false;
     }
 
     public int getId() {
@@ -75,6 +76,15 @@ public class Rential implements Comparable<Rential> {
 
     public Rential setParkingRent(boolean parkingRent) {
         isParkingRent = parkingRent;
+        return this;
+    }
+
+    public boolean isArchived() {
+        return archived;
+    }
+
+    public Rential setArchived(boolean archived) {
+        this.archived = archived;
         return this;
     }
 
