@@ -14,6 +14,7 @@ public class Flat {
     private Block block;
     private String localNo;
     private float surface;
+    private ParkingPlace parkingPlace;
 
 
     public Flat(){
@@ -49,5 +50,19 @@ public class Flat {
     public Flat setSurface(float surface) {
         this.surface = surface;
         return this;
+    }
+
+    public ParkingPlace getParkingPlace() {
+        return parkingPlace;
+    }
+
+    public Flat setParkingPlace(ParkingPlace parkingPlace) {
+        this.parkingPlace = parkingPlace;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return getBlock().getAddress() + "/"+getLocalNo()+ ", "+getSurface()+"m³";
     }
 }

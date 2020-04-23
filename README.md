@@ -12,5 +12,10 @@
 - Run compiled `App.class` or
 - Run `.jar` compiled package
 
+### Testing
+
+Available accounts:
+
+
 \
 &copy; Jakub Wójtowicz <s20912@pjwstk.edu.pl> 2020

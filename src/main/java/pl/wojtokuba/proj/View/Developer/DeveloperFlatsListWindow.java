@@ -32,13 +32,14 @@ public class DeveloperFlatsListWindow extends DeveloperMainWindow implements Win
                 new Separator(Direction.HORIZONTAL)
                         .setLayoutData(
                                 GridLayout.createHorizontallyFilledLayoutData(10)));
-        CustomTable<String> table = new CustomTable<>("ID", "Adres", "Osiedle", "Powierzchnia");
+        CustomTable<String> table = new CustomTable<>("ID", "Adres", "Osiedle", "Powierzchnia", "Powierzchnia parkingu");
         for (Flat flat : developerFlatsListViewModel.getFlats()) {
             table.getTableModel().addRow(
                     String.valueOf(flat.getId()),
                     flat.getBlock().getAddress() + "/" + flat.getLocalNo(),
                     flat.getBlock().getEstate().toString(),
-                    flat.getSurface() +" m³"
+                    flat.getSurface() +" m³",
+                    flat.getParkingPlace().getSurface() +" m³"
 
             );
         }

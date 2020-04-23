@@ -1,18 +1,12 @@
 package pl.wojtokuba.proj;
 
 import pl.wojtokuba.proj.Exceptions.EntityNotUniqueException;
-import pl.wojtokuba.proj.Model.Block;
-import pl.wojtokuba.proj.Model.Estate;
-import pl.wojtokuba.proj.Model.Flat;
-import pl.wojtokuba.proj.Model.User;
+import pl.wojtokuba.proj.Model.*;
 import pl.wojtokuba.proj.Storage.BlockStorage;
 import pl.wojtokuba.proj.Storage.EstateStorage;
 import pl.wojtokuba.proj.Storage.FlatStorage;
 import pl.wojtokuba.proj.Storage.UserStorage;
-import pl.wojtokuba.proj.Utils.LoggerUtil;
-import pl.wojtokuba.proj.Utils.SimpleInjector;
-import pl.wojtokuba.proj.Utils.SystemRoles;
-import pl.wojtokuba.proj.Utils.TimeLapseManager;
+import pl.wojtokuba.proj.Utils.*;
 import pl.wojtokuba.proj.View.LoginWindow;
 
 import java.util.logging.Level;
@@ -21,11 +15,11 @@ import java.util.logging.Logger;
 public class App {
     public static void main(String[] args){
 
-        // LOGGING FINE @TODO REMOVE THIS SECTION BEFORE SUBMITTING
-        Logger rootLog = Logger.getLogger("");
-        rootLog.setLevel( Level.FINE );
-        rootLog.getHandlers()[0].setLevel( Level.FINE ); // Default console handler
-        // END LOGGER
+//        // LOGGING FINE @TODO REMOVE THIS SECTION BEFORE SUBMITTING
+//        Logger rootLog = Logger.getLogger("");
+//        rootLog.setLevel( Level.FINE );
+//        rootLog.getHandlers()[0].setLevel( Level.FINE ); // Default console handler
+//        // END LOGGER
 
         //setup IoC injector
         SimpleInjector.Setup();
@@ -53,8 +47,18 @@ public class App {
             try {
                 LoggerUtil.getLogger().fine("MOCKING SYSTEM USERS: [dev, ten1, ten2]...");
                 userStorage.push(new User("dev", SystemRoles.DEVELOPER));
-                userStorage.push(new User("ten1", SystemRoles.TENANT));
-                userStorage.push(new User("ten2", SystemRoles.TENANT));
+                userStorage.push(new User("ten1", SystemRoles.TENANT)
+                        .setName("Jan")
+                        .setLastName("Kowalski")
+                        .setPesel("00202033232")
+                        .setBirthDate("02-23-1996")
+                );
+                userStorage.push(new User("ten2", SystemRoles.TENANT)
+                        .setName("Piotr")
+                        .setLastName("Nowak")
+                        .setPesel("11225533434")
+                        .setBirthDate("02-23-1966")
+                );
             } catch (EntityNotUniqueException e){
                 e.fillInStackTrace();
             }
@@ -86,22 +90,34 @@ public class App {
             flatStorage.push(new Flat()
                     .setBlock(blockStorage.findOneById(1))
                     .setLocalNo("1")
-                    .setSurface(65)
+                    .setSurface(22)
+                    .setParkingPlace(new ParkingPlace()
+                            .setSurface(15)
+                    )
             );
             flatStorage.push(new Flat()
                     .setBlock(blockStorage.findOneById(1))
                     .setLocalNo("2")
-                    .setSurface(65)
+                    .setSurface(33)
+                    .setParkingPlace(new ParkingPlace()
+                            .setSurface(11)
+                    )
             );
             flatStorage.push(new Flat()
                     .setBlock(blockStorage.findOneById(1))
                     .setLocalNo("3")
-                    .setSurface(65)
+                    .setSurface(24)
+                    .setParkingPlace(new ParkingPlace()
+                            .setSurface(14)
+                    )
             );
             flatStorage.push(new Flat()
                     .setBlock(blockStorage.findOneById(1))
                     .setLocalNo("4")
-                    .setSurface(65)
+                    .setSurface(122)
+                    .setParkingPlace(new ParkingPlace()
+                            .setSurface(15)
+                    )
             );
         }
     }

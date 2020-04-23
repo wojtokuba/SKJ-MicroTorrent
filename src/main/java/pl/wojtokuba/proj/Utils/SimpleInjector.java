@@ -16,6 +16,7 @@ public class SimpleInjector {
         Object[] objects = new Object[]{
                 new TimeLapseManager(),
                 new MainViewManager(),
+                new RentialStorage(),
                 new UserStorage(),
                 new SessionStorage(),
                 new EstateStorage(),

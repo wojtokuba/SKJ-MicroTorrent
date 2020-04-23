@@ -16,6 +16,7 @@ public class DeveloperFlatsNewWindow extends DeveloperMainWindow implements Wind
     DeveloperFlatsNewViewModel developerFlatsNewViewModel;
     TextBoxFormGroup localNo;
     TextBoxFormGroup surface;
+    TextBoxFormGroup parkingSurface;
     ComboBoxFormGroup<Block> blocks;
     Label errorMessage;
 
@@ -39,6 +40,7 @@ public class DeveloperFlatsNewWindow extends DeveloperMainWindow implements Wind
 
         contentPanel.addComponent(localNo = new TextBoxFormGroup("Numer lokalu:",8,2));
         contentPanel.addComponent(surface = new TextBoxFormGroup("Powierzchnia (w m³ lub jako x,y,z w metrach):",8,2));
+        contentPanel.addComponent(parkingSurface = new TextBoxFormGroup("Powierzchnia parkingu (w m³ lub jako x,y,z w metrach):",8,2));
         contentPanel.addComponent(
                 blocks = new ComboBoxFormGroup<Block>("Budynek:",8,2)
                           .setValues(developerFlatsNewViewModel.getBlocks())
@@ -72,6 +74,10 @@ public class DeveloperFlatsNewWindow extends DeveloperMainWindow implements Wind
 
     public String getSurface(){
         return this.surface.getValue();
+    }
+
+    public String getParkingSurface(){
+        return this.parkingSurface.getValue();
     }
 
     public Block getBlock(){

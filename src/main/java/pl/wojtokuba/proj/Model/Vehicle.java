@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public abstract class Vehicle {
     private static final AtomicInteger count = new AtomicInteger(1);
 
-    private int id;
+    private final int id;
     private String vehicleName;
     private ParkingPlace assignedParkingPlace;
 

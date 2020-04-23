@@ -60,6 +60,10 @@ public class TimeLapseManager implements Runnable{
         everyFiveSecs++;
     }
 
+    public synchronized Date getAppDate(){
+        return appDate;
+    }
+
     @Override
     public void run() {
 

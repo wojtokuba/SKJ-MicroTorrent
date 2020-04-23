@@ -3,6 +3,7 @@ package pl.wojtokuba.proj.ViewModel.Developer;
 import pl.wojtokuba.proj.Model.Block;
 import pl.wojtokuba.proj.Model.Estate;
 import pl.wojtokuba.proj.Model.Flat;
+import pl.wojtokuba.proj.Model.ParkingPlace;
 import pl.wojtokuba.proj.Storage.BlockStorage;
 import pl.wojtokuba.proj.Storage.EstateStorage;
 import pl.wojtokuba.proj.Storage.FlatStorage;
@@ -33,6 +34,9 @@ public class DeveloperFlatsNewViewModel {
                 .setLocalNo(developerFlatsNewWindow.getLocalNo())
                 .setBlock(developerFlatsNewWindow.getBlock())
                 .setSurface(SurfaceConverter.parseSurface(developerFlatsNewWindow.getSurface()))
+                .setParkingPlace(new ParkingPlace()
+                        .setSurface(SurfaceConverter.parseSurface(developerFlatsNewWindow.getSurface()))
+                )
         );
         developerFlatsNewWindow.success();
     }

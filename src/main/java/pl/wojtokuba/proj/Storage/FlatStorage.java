@@ -3,6 +3,8 @@ package pl.wojtokuba.proj.Storage;
 import pl.wojtokuba.proj.Model.Block;
 import pl.wojtokuba.proj.Model.Estate;
 import pl.wojtokuba.proj.Model.Flat;
+import pl.wojtokuba.proj.Model.Rential;
+import pl.wojtokuba.proj.Utils.SimpleInjector;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -48,6 +50,18 @@ public class FlatStorage {
         for(Flat flat : this.flat.values()){
             if(flat.getBlock().getEstate() == estate){
                 result.add(flat);
+            }
+        }
+        return result;
+    }
+
+    public Collection<Flat> findAllFree(){
+        Collection<Flat> result = new ArrayList<>();
+        RentialStorage rentialStorage = (RentialStorage) SimpleInjector.resolveObject(RentialStorage.class);
+        if(rentialStorage != null){
+            for(Flat flat : this.flat.values()){
+                if(rentialStorage.findOneActiveByFlat(flat) == null)
+                    result.add(flat);
             }
         }
         return result;
