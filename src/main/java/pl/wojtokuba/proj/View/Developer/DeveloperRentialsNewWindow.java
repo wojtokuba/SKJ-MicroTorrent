@@ -9,6 +9,8 @@ import pl.wojtokuba.proj.Components.TextBoxFormGroup;
 import pl.wojtokuba.proj.Model.Block;
 import pl.wojtokuba.proj.Model.Flat;
 import pl.wojtokuba.proj.Model.User;
+import pl.wojtokuba.proj.Utils.SimpleInjector;
+import pl.wojtokuba.proj.Utils.TimeLapseManager;
 import pl.wojtokuba.proj.View.WindowRenderable;
 import pl.wojtokuba.proj.ViewModel.Developer.DeveloperEstatesNewViewModel;
 import pl.wojtokuba.proj.ViewModel.Developer.DeveloperRentialsNewViewModel;
@@ -16,6 +18,7 @@ import pl.wojtokuba.proj.ViewModel.Developer.DeveloperRentialsNewViewModel;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class DeveloperRentialsNewWindow extends DeveloperMainWindow implements WindowRenderable {
 
@@ -94,7 +97,8 @@ public class DeveloperRentialsNewWindow extends DeveloperMainWindow implements W
     }
 
     public Timestamp getEndDate(){
-        Timestamp ts = new Timestamp(System.currentTimeMillis());
+        TimeLapseManager timeLapseManager = (TimeLapseManager) SimpleInjector.resolveObject(TimeLapseManager.class);
+        Timestamp ts = new Timestamp(timeLapseManager.getAppDate().getTime());
         Calendar cal = Calendar.getInstance();
         cal.setTime(ts);
         cal.add(Calendar.DATE, Integer.parseInt(this.rentialEndDate.getValue()));

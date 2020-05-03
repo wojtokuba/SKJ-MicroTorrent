@@ -108,6 +108,7 @@ public class DeveloperRentialsNewUserWindow extends DeveloperMainWindow implemen
         this.lastName.setValue("");
         this.address.setValue("");
         this.pesel.setValue("");
+        this.birthDate.setValue("");
         this.errorMessage.setForegroundColor(new TextColor.RGB(0, 255, 0));
         this.errorMessage.setText("Najemca dodany pomyślnie!");
     }

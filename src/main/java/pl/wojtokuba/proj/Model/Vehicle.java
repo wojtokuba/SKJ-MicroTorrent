@@ -9,11 +9,12 @@ public abstract class Vehicle {
 
     private final int id;
     private String vehicleName;
-    private ParkingPlace assignedParkingPlace;
+    private float itemSize;
 
-    public Vehicle(String vehicleName){
+    public Vehicle(String vehicleName, float itemSize){
         this.id = count.incrementAndGet();
         this.vehicleName = vehicleName;
+        this.itemSize = itemSize;
     }
 
     public Vehicle(){
@@ -32,11 +33,8 @@ public abstract class Vehicle {
         this.vehicleName = vehicleName;
     }
 
-    public ParkingPlace getAssignedParkingPlace() {
-        return assignedParkingPlace;
+    public float getItemSize() {
+        return itemSize;
     }
 
-    public void setAssignedParkingPlace(ParkingPlace assignedParkingPlace) {
-        this.assignedParkingPlace = assignedParkingPlace;
-    }
 }

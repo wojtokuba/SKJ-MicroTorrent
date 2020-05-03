@@ -50,4 +50,8 @@ public class ComboBoxFormGroup<T> extends Panel {
         }
          return this;
     }
+
+    public ComboBox<T> getComboBox(){
+        return this.comboBox;
+    }
 }

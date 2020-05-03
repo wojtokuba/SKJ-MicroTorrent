@@ -38,7 +38,7 @@ public class ParkingPlace {
         return items;
     }
 
-    public ParkingPlace setItem(Vehicle vehicle) {
+    public ParkingPlace addItem(Vehicle vehicle) {
         this.items.put(vehicle.getId(), vehicle);
         return this;
     }

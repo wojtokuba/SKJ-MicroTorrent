@@ -15,7 +15,9 @@
 ### Testing
 
 Available accounts:
-
+- dev - DEWELOPER
+- ten1 - Tenant 1
+- ten2 - Tenant 2
 
 \
 &copy; Jakub Wójtowicz <s20912@pjwstk.edu.pl> 2020

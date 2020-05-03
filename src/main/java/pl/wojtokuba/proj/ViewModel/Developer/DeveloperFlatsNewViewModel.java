@@ -35,7 +35,7 @@ public class DeveloperFlatsNewViewModel {
                 .setBlock(developerFlatsNewWindow.getBlock())
                 .setSurface(SurfaceConverter.parseSurface(developerFlatsNewWindow.getSurface()))
                 .setParkingPlace(new ParkingPlace()
-                        .setSurface(SurfaceConverter.parseSurface(developerFlatsNewWindow.getSurface()))
+                        .setSurface(SurfaceConverter.parseSurface(developerFlatsNewWindow.getParkingSurface()))
                 )
         );
         developerFlatsNewWindow.success();

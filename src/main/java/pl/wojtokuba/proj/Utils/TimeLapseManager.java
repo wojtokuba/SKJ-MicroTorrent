@@ -63,7 +63,7 @@ public class TimeLapseManager implements Runnable{
         everyFiveSecs++;
     }
 
-    public synchronized Date getAppDate(){
+    public Date getAppDate(){
         return appDate;
     }
 

@@ -57,7 +57,7 @@ public class RentialStorage {
         for(Rential rential : this.rential.values()){
             if(rential.getOwner() == user) {
                 assert timeLapseManager != null;
-                if (rential.getRentEnd().after(new Timestamp(timeLapseManager.getAppDate().getTime()))) {
+                if (rential.getRentEnd().after(timeLapseManager.getAppDate())) {
                     result.add(rential);
                 }
             }
@@ -71,7 +71,7 @@ public class RentialStorage {
         Collection<Rential> result = new ArrayList<>();
         for(Rential rential : this.rential.values()){
             assert timeLapseManager != null;
-            if (!rential.isArchived() && rential.getRentEnd().before(new Timestamp(timeLapseManager.getAppDate().getTime()))) {
+            if (!rential.isArchived() && rential.getRentEnd().before(timeLapseManager.getAppDate())) {
                 result.add(rential);
             }
         }
@@ -85,7 +85,7 @@ public class RentialStorage {
         for(Rential rential : this.rential.values()){
             if(rential.getOwner() == user) {
                 assert timeLapseManager != null;
-                if (rential.getRentEnd().after(new Timestamp(timeLapseManager.getAppDate().getTime()))) {
+                if (rential.getRentEnd().after(timeLapseManager.getAppDate())) {
                     result += rential.getFlat().getParkingPlace().getItems().size();
                 }
             }
