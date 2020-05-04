@@ -4,6 +4,14 @@ public class CityCar extends Vehicle {
 
     private float fuelUsage;
 
+    public CityCar(String vehicleName, float itemSize) {
+        super(vehicleName, itemSize);
+    }
+
+    public CityCar() {
+        super();
+    }
+
     public float getFuelUsage() {
         return fuelUsage;
     }

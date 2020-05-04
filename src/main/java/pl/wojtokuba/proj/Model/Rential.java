@@ -92,4 +92,9 @@ public class Rential implements Comparable<Rential> {
     public int compareTo(Rential o) {
         return this.rentEnd.compareTo(o.rentEnd);
     }
+
+    @Override
+    public String toString() {
+        return "Mieszkanie - " + getFlat();
+    }
 }

@@ -4,6 +4,14 @@ public class Motocycle extends Vehicle {
 
     private int maxSpeed;
 
+    public Motocycle(String vehicleName, float itemSize) {
+        super(vehicleName, itemSize);
+    }
+
+    public Motocycle() {
+
+    }
+
     public int getMaxSpeed() {
         return maxSpeed;
     }

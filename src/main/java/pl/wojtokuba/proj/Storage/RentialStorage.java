@@ -49,6 +49,15 @@ public class RentialStorage {
         return null;
     }
 
+    public Rential findOneById(int id){
+        for(Rential rential : this.rential.values()){
+            if(rential.getId() == id) {
+                return rential;
+            }
+        }
+        return null;
+    }
+
 
     public Collection<Rential> findAllActiveByUser(User user){
         TimeLapseManager timeLapseManager = (TimeLapseManager) SimpleInjector.resolveObject(TimeLapseManager.class);

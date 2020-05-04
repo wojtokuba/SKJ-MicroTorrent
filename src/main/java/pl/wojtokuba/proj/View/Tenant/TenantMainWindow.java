@@ -6,6 +6,7 @@ import pl.wojtokuba.proj.Commands.AppExit;
 import pl.wojtokuba.proj.Commands.Developer.*;
 import pl.wojtokuba.proj.Commands.Logout;
 import pl.wojtokuba.proj.Commands.Tenant.AddItemToFlat;
+import pl.wojtokuba.proj.Commands.Tenant.OpenTenantRentials;
 import pl.wojtokuba.proj.Components.AppInfoNavbar;
 import pl.wojtokuba.proj.Components.NavBarMenu;
 import pl.wojtokuba.proj.Utils.MainViewManager;
@@ -19,12 +20,17 @@ import java.util.HashMap;
 
 public class TenantMainWindow extends BaseWindow {
 
-    MainViewManager mainViewManager;
+    MainViewManager mainViewManager = (MainViewManager)SimpleInjector.resolveObject(MainViewManager.class);
     GridLayout borderLayout;
     TenantMainViewModel tenantMainViewModel;
 
     public TenantMainWindow() {
         super("Najemca");
+        tenantMainViewModel = new TenantMainViewModel(this);
+    }
+
+    public TenantMainWindow(boolean overrideRendering) {
+        super("Najemca", overrideRendering);
         tenantMainViewModel = new TenantMainViewModel(this);
     }
 
@@ -39,7 +45,7 @@ public class TenantMainWindow extends BaseWindow {
         MenuBar menuBar = new MenuBar();
         new NavBarMenu("Moje Wynajmy",
                 new HashMap<>(){{
-//                    put("Lista", new OpenMyEstates());
+                    put("Wynajmowane mieszkania", new OpenTenantRentials());
                     put("Dodaj przedmiot", new AddItemToFlat());
 //                    put("Dodaj współlokatora", new OpenMyEstates());
                 }},

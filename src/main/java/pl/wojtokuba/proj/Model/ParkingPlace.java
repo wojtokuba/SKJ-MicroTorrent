@@ -43,6 +43,19 @@ public class ParkingPlace {
         return this;
     }
 
+    public float getAvailableSurface(){
+        float available = this.getSurface();
+        for(Vehicle item : this.items.values()){
+            available -= item.getItemSize();
+        }
+        return available;
+    }
+
+    public ParkingPlace deleteItem(Vehicle vehicle){
+        this.items.remove(vehicle.getId());
+        return this;
+    }
+
     public ParkingPlace resetItems(){
         this.items = new HashMap<>();
         return this;

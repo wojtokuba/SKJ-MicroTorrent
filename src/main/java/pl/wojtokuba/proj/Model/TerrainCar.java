@@ -4,6 +4,14 @@ public class TerrainCar extends Vehicle {
 
     private String enginePower;
 
+    public TerrainCar(String vehicleName, float itemSize) {
+        super(vehicleName, itemSize);
+    }
+
+    public TerrainCar() {
+
+    }
+
     public String getEnginePower() {
         return enginePower;
     }

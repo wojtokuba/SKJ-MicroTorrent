@@ -26,10 +26,18 @@ public abstract class BaseWindow extends AbstractWindow implements WindowRendera
         drawWindow();
         render();
         mainViewManager.getWindowBasedTextGUI().addWindowAndWait(this);
-
+    }
+    public BaseWindow(String windowTitle, boolean overrideRendering){
+        super(windowTitle);
+        if(!overrideRendering){
+            drawBasis();
+            drawWindow();
+            render();
+            mainViewManager.getWindowBasedTextGUI().addWindowAndWait(this);
+        }
     }
 
-    private void drawBasis(){
+    protected void drawBasis(){
         setHints(Arrays.asList(Hint.NO_DECORATIONS, Hint.FULL_SCREEN));
         mainViewManager = (MainViewManager) SimpleInjector.resolveObject(MainViewManager.class);
         contentPanel = new Panel(new GridLayout(10));

@@ -110,6 +110,42 @@ public class TenantVehicleAddWindow extends TenantMainWindow implements WindowRe
                         1)));
     }
 
+    public Vehicle getVehicleType() {
+        return vehicleType.getSelected();
+    }
+
+    public Flat getFlat(){
+        return flatList.getSelected();
+    }
+
+    public String getEnginePower(){
+        return enginePower.getValue();
+    }
+
+    public String getMaxWaterSpeed(){
+        return maxWaterSpeed.getValue();
+    }
+
+    public String getFuelTankSize(){
+        return fuelTankSize.getValue();
+    }
+
+    public String getFuelUsage(){
+        return fuelUsage.getValue();
+    }
+
+    public String getMaxSpeed(){
+        return maxSpeed.getValue();
+    }
+
+    public String getVehicleName(){
+        return vehicleName.getValue();
+    }
+
+    public String getVehicleSize(){
+        return vehicleSize.getValue();
+    }
+
     public void setErrorMessage(String text){
         this.errorMessage.setForegroundColor(new TextColor.RGB(255, 0, 0));
         this.errorMessage.setText(text);
@@ -117,6 +153,6 @@ public class TenantVehicleAddWindow extends TenantMainWindow implements WindowRe
 
     public void success(){
         this.errorMessage.setForegroundColor(new TextColor.RGB(0, 255, 0));
-        this.errorMessage.setText("Mieszkanie dodane pomyślnie!");
+        this.errorMessage.setText("Pojazd dodany pomyślnie!");
     }
 }
