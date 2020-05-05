@@ -3,14 +3,13 @@ package pl.wojtokuba.proj.Commands;
 import pl.wojtokuba.proj.Model.File;
 import pl.wojtokuba.proj.Model.Rential;
 import pl.wojtokuba.proj.Storage.RentialStorage;
-import pl.wojtokuba.proj.Utils.LoggerUtil;
 import pl.wojtokuba.proj.Utils.SimpleInjector;
 
-public class CheckRentialDatesCommand extends BaseCommand {
+public class RemoveFilesForProlongatedCommand extends BaseCommand {
     private static boolean isRunning;
 
-    public CheckRentialDatesCommand() {
-        super("Checking for rentials to release...");
+    public RemoveFilesForProlongatedCommand() {
+        super("Removing files for all prolongated rentials...");
     }
 
     private final RentialStorage rentialStorage = (RentialStorage) SimpleInjector.resolveObject(RentialStorage.class);
@@ -22,11 +21,9 @@ public class CheckRentialDatesCommand extends BaseCommand {
             return;
         isRunning = true;
         assert rentialStorage != null;
-        for(Rential rential : rentialStorage.findFinishedNotArchived()){
-            if(rential.getPayCall() == null){
-                File payCall = new File().setRential(rential);
-                rential.setPayCall(payCall);
-                LoggerUtil.getLogger().fine("Setting awaiting payment flag for: "+ rential.toString());
+        for(Rential rential : rentialStorage.findAllNotFinished()){
+            if(rential.getPayCall() != null){
+                rential.setPayCall(null);
             }
         }
         /*

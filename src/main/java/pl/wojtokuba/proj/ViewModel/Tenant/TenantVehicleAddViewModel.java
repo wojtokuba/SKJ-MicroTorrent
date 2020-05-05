@@ -72,7 +72,7 @@ public class TenantVehicleAddViewModel {
     }
     public Collection<Flat> getMyFlats(){
         Collection<Flat> result = new ArrayList<>();
-        for(Rential rential : rentialStorage.findAllActiveByUser(sessionStorage.getLoggedInUser())){
+        for(Rential rential : rentialStorage.findNotArchivedForUser(sessionStorage.getLoggedInUser())){
             if(rential.isParkingRent()){
                 result.add(rential.getFlat());
             }

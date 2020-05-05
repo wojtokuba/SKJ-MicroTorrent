@@ -2,7 +2,11 @@ package pl.wojtokuba.proj.Utils;
 
 import pl.wojtokuba.proj.Commands.BaseCommand;
 import pl.wojtokuba.proj.Commands.CheckRentialDatesCommand;
+import pl.wojtokuba.proj.Commands.ExecuteExmissionCommand;
+import pl.wojtokuba.proj.Commands.RemoveFilesForProlongatedCommand;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,6 +34,8 @@ public class TimeLapseManager implements Runnable{
         LoggerUtil.getLogger().fine("Setting date to: " + dateFormat.format(appDate));
         //queue checking rential dates
         queue.add(new CheckRentialDatesCommand());
+        queue.add(new ExecuteExmissionCommand());
+        queue.add(new RemoveFilesForProlongatedCommand());
         timeThread.start();
     }
     public void end(){
@@ -55,7 +61,7 @@ public class TimeLapseManager implements Runnable{
         if(everyFiveSecs == 5){
             Calendar c = Calendar.getInstance();
             c.setTime(appDate);
-            c.add(Calendar.DAY_OF_MONTH, 1);
+            c.add(Calendar.DATE, 1);
             appDate = c.getTime();
             LoggerUtil.getLogger().fine("Time lapses, new day has begun: " + dateFormat.format(appDate));
             everyFiveSecs = 0;
@@ -81,5 +87,23 @@ public class TimeLapseManager implements Runnable{
                 e.printStackTrace();
             }
         }
+    }
+
+    public static Timestamp addDays(long timestamp, int days){
+        Timestamp ts = new Timestamp(timestamp);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(ts);
+        cal.add(Calendar.DATE, days);
+        ts.setTime(cal.getTime().getTime());
+        return ts;
+    }
+
+    public static Timestamp addMonths(long timestamp, int months){
+        Timestamp ts = new Timestamp(timestamp);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(ts);
+        cal.add(Calendar.MONTH, months);
+        ts.setTime(cal.getTime().getTime());
+        return ts;
     }
 }

@@ -17,6 +17,7 @@ public class Rential implements Comparable<Rential> {
     private final Timestamp rentAt;
     private Timestamp rentEnd;
     private boolean archived;
+    private File payCall;
     public Rential(){
         this.id = count.incrementAndGet();
         this.rentAt = new Timestamp(System.currentTimeMillis());
@@ -50,6 +51,10 @@ public class Rential implements Comparable<Rential> {
 
     public Map<Integer, User> getCompanions() {
         return companions;
+    }
+    public Rential removeCompanion(User user){
+        companions.remove(user.getId());
+        return this;
     }
 
     public Rential setCompanion(User user) {
@@ -85,6 +90,15 @@ public class Rential implements Comparable<Rential> {
 
     public Rential setArchived(boolean archived) {
         this.archived = archived;
+        return this;
+    }
+
+    public File getPayCall() {
+        return payCall;
+    }
+
+    public Rential setPayCall(File payCall) {
+        this.payCall = payCall;
         return this;
     }
 

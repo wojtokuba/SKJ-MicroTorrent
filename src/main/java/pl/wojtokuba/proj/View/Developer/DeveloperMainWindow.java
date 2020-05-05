@@ -67,6 +67,7 @@ public class DeveloperMainWindow extends BaseWindow {
         new NavBarMenu("System",
                 new HashMap<>(){{
                     put("Zakończ", new AppExit());
+                    put("Wyeksportuj raport", new ExportReport());
                     put("Wyloguj", new Logout());
                 }},
                 menuBar

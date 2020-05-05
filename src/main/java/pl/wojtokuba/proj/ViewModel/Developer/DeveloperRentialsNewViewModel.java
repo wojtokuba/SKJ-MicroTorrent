@@ -2,6 +2,7 @@ package pl.wojtokuba.proj.ViewModel.Developer;
 
 import pl.wojtokuba.proj.Exceptions.EntityNotUniqueException;
 import pl.wojtokuba.proj.Exceptions.NotTenantRoleException;
+import pl.wojtokuba.proj.Exceptions.ProblematicTenantException;
 import pl.wojtokuba.proj.Exceptions.TooManyRentialsException;
 import pl.wojtokuba.proj.Model.Block;
 import pl.wojtokuba.proj.Model.Flat;
@@ -37,6 +38,19 @@ public class DeveloperRentialsNewViewModel {
             return;
         }
         try {
+            //check is user not called 3 tripple
+            Collection<Rential> called = rentialStorage.findCalledForUser(developerRentialsNewWindow.getUsername());
+            if(called.size() >= 3){
+                StringBuilder rooms = new StringBuilder();
+                for (Rential rential : called){
+                    rooms.append(rential.getFlat()).append(", ");
+                }
+                throw new ProblematicTenantException("Osoba "+
+                        developerRentialsNewWindow.getUsername().getFullName()+
+                        " posiadała już najem pomieszczeń: "+rooms);
+            }
+            //end
+
             rentialStorage.push(
                     new Rential()
                             .setOwner(developerRentialsNewWindow.getUsername())
@@ -47,8 +61,11 @@ public class DeveloperRentialsNewViewModel {
         } catch (NotTenantRoleException e){
             developerRentialsNewWindow.setErrorMessage("Podany użytkownik jest deweloperem!");
             return;
-        } catch (TooManyRentialsException e){
-            developerRentialsNewWindow.setErrorMessage("Łączna ilość przedmiotów i mieszkań przekracza 5 wynajem nieudany!");
+        } catch (TooManyRentialsException e) {
+            developerRentialsNewWindow.setErrorMessage("Łączna ilość miejsc parkingowych i mieszkań przekracza 5. Wynajem nieudany!");
+            return;
+        } catch (ProblematicTenantException e){
+            developerRentialsNewWindow.setErrorMessage(e.getMessage());
             return;
         } catch (Exception e){
             e.printStackTrace();

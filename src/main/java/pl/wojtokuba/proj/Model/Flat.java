@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;
 
 //Changed name from Mieszkanie to Flat to be systematic
-public class Flat {
+public class Flat implements Comparable<Flat> {
     private static final AtomicInteger count = new AtomicInteger(0);
     private final int id;
     private Block block;
@@ -64,5 +64,10 @@ public class Flat {
     @Override
     public String toString() {
         return getBlock().getAddress() + "/"+getLocalNo()+ ", "+getSurface()+"m³";
+    }
+
+    @Override
+    public int compareTo(Flat o) {
+        return (int)(getSurface() - o.getSurface());
     }
 }

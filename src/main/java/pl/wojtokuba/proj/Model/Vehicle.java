@@ -29,8 +29,9 @@ public abstract class Vehicle {
         return vehicleName;
     }
 
-    public void setVehicleName(String vehicleName) {
+    public Vehicle setVehicleName(String vehicleName) {
         this.vehicleName = vehicleName;
+        return this;
     }
 
     public float getItemSize() {

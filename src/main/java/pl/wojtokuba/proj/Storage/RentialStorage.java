@@ -41,7 +41,7 @@ public class RentialStorage {
         for(Rential rential : this.rential.values()){
             if(rential.getFlat() == flat) {
                 assert timeLapseManager != null;
-                if (rential.getRentEnd().after(timeLapseManager.getAppDate())) {
+                if (!rential.isArchived()) {
                     return rential;
                 }
             }
@@ -66,9 +66,65 @@ public class RentialStorage {
         for(Rential rential : this.rential.values()){
             if(rential.getOwner() == user) {
                 assert timeLapseManager != null;
-                if (rential.getRentEnd().after(timeLapseManager.getAppDate())) {
+                if (!rential.isArchived()) {
                     result.add(rential);
                 }
+            }
+        }
+        return result;
+    }
+
+    public Collection<Rential> findCalledForUser(User user){
+        TimeLapseManager timeLapseManager = (TimeLapseManager) SimpleInjector.resolveObject(TimeLapseManager.class);
+
+        Collection<Rential> result = new ArrayList<>();
+        for(Rential rential : this.rential.values()){
+            if(rential.getOwner() == user) {
+                assert timeLapseManager != null;
+                if (rential.getPayCall() != null) {
+                    result.add(rential);
+                }
+            }
+        }
+        return result;
+    }
+
+    public Collection<Rential> findNotArchivedForUser(User user){
+        TimeLapseManager timeLapseManager = (TimeLapseManager) SimpleInjector.resolveObject(TimeLapseManager.class);
+
+        Collection<Rential> result = new ArrayList<>();
+        for(Rential rential : this.rential.values()){
+            if(rential.getOwner() == user) {
+                assert timeLapseManager != null;
+                if (!rential.isArchived()) {
+                    result.add(rential);
+                }
+            }
+        }
+        return result;
+    }
+
+    public Collection<Rential> findAllActive(){
+        TimeLapseManager timeLapseManager = (TimeLapseManager) SimpleInjector.resolveObject(TimeLapseManager.class);
+
+        Collection<Rential> result = new ArrayList<>();
+        for(Rential rential : this.rential.values()){
+            assert timeLapseManager != null;
+            if (!rential.isArchived()) {
+                result.add(rential);
+            }
+        }
+        return result;
+    }
+
+    public Collection<Rential> findAllNotFinished(){
+        TimeLapseManager timeLapseManager = (TimeLapseManager) SimpleInjector.resolveObject(TimeLapseManager.class);
+
+        Collection<Rential> result = new ArrayList<>();
+        for(Rential rential : this.rential.values()){
+            assert timeLapseManager != null;
+            if (rential.getRentEnd().after(timeLapseManager.getAppDate())) {
+                result.add(rential);
             }
         }
         return result;
@@ -94,8 +150,8 @@ public class RentialStorage {
         for(Rential rential : this.rential.values()){
             if(rential.getOwner() == user) {
                 assert timeLapseManager != null;
-                if (rential.getRentEnd().after(timeLapseManager.getAppDate())) {
-                    result += rential.getFlat().getParkingPlace().getItems().size();
+                if (!rential.isArchived()) {
+                    result += rential.isParkingRent() ? 1 : 0;
                 }
             }
         }

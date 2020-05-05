@@ -6,6 +6,7 @@ import pl.wojtokuba.proj.Commands.AppExit;
 import pl.wojtokuba.proj.Commands.Developer.*;
 import pl.wojtokuba.proj.Commands.Logout;
 import pl.wojtokuba.proj.Commands.Tenant.AddItemToFlat;
+import pl.wojtokuba.proj.Commands.Tenant.AddPersonToFlat;
 import pl.wojtokuba.proj.Commands.Tenant.OpenTenantRentials;
 import pl.wojtokuba.proj.Components.AppInfoNavbar;
 import pl.wojtokuba.proj.Components.NavBarMenu;
@@ -47,7 +48,7 @@ public class TenantMainWindow extends BaseWindow {
                 new HashMap<>(){{
                     put("Wynajmowane mieszkania", new OpenTenantRentials());
                     put("Dodaj przedmiot", new AddItemToFlat());
-//                    put("Dodaj współlokatora", new OpenMyEstates());
+                    put("Dodaj współlokatora", new AddPersonToFlat());
                 }},
                 menuBar
         );

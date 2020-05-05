@@ -16,8 +16,9 @@ public class Amfibia extends Vehicle {
         return maxWaterSpeed;
     }
 
-    public void setMaxWaterSpeed(int maxWaterSpeed) {
+    public Amfibia setMaxWaterSpeed(int maxWaterSpeed) {
         this.maxWaterSpeed = maxWaterSpeed;
+        return this;
     }
 
     @Override

@@ -20,6 +20,6 @@ public class TenantRentialsListViewModel {
     }
 
     public Collection<Rential> getAllRentials(){
-        return rentialStorage.findAllActiveByUser(sessionStorage.getLoggedInUser());
+        return rentialStorage.findNotArchivedForUser(sessionStorage.getLoggedInUser());
     }
 }
