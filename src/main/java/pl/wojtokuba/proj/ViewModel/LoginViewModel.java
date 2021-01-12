@@ -1,36 +1,28 @@
 package pl.wojtokuba.proj.ViewModel;
 
-import pl.wojtokuba.proj.Model.User;
-import pl.wojtokuba.proj.Storage.SessionStorage;
-import pl.wojtokuba.proj.Storage.UserStorage;
+import pl.wojtokuba.proj.Storage.ConfigStorage;
+import pl.wojtokuba.proj.Utils.BaseAppConfigs;
+import pl.wojtokuba.proj.Utils.Net.TCPServer;
 import pl.wojtokuba.proj.Utils.SimpleInjector;
-import pl.wojtokuba.proj.Utils.SystemRoles;
-import pl.wojtokuba.proj.View.Developer.DeveloperMainWindow;
-import pl.wojtokuba.proj.View.LoginWindow;
-import pl.wojtokuba.proj.View.Tenant.TenantMainWindow;
+import pl.wojtokuba.proj.View.AppWorkModeWindow;
+import pl.wojtokuba.proj.View.Server.ServerMainWindow;
 
 public class LoginViewModel {
-    LoginWindow loginWindow;
-    UserStorage userStorage = (UserStorage) SimpleInjector.resolveObject(UserStorage.class);
-    SessionStorage sessionStorage = (SessionStorage) SimpleInjector.resolveObject(SessionStorage.class);
-    public LoginViewModel(LoginWindow loginWindow){
-        this.loginWindow = loginWindow;
+    AppWorkModeWindow appWorkModeWindow;
+    ConfigStorage config = (ConfigStorage) SimpleInjector.resolveObject(ConfigStorage.class);
+    TCPServer tcpServer = (TCPServer) SimpleInjector.resolveObject(TCPServer.class);
+    public LoginViewModel(AppWorkModeWindow appWorkModeWindow){
+        this.appWorkModeWindow = appWorkModeWindow;
     }
 
 
     public void LoginUser(){
-        loginWindow.setErrorMessage("");
-        User logged = userStorage.findOneByUsername(loginWindow.getUsername());
-        if(logged == null){
-            loginWindow.setErrorMessage("Nie znaleziono uzytkownika.");
-            return;
+        appWorkModeWindow.setErrorMessage("");
+        config.set(ConfigStorage.SettingValues.TRANSMISSION_PROTOCOL, this.appWorkModeWindow.getAppTransmissionProtocol());
+        appWorkModeWindow.close();
+        if (config.get(ConfigStorage.SettingValues.TRANSMISSION_PROTOCOL).equals(BaseAppConfigs.PROTO_TCP)){
+            tcpServer.startTCPListen();
         }
-        loginWindow.close();
-        sessionStorage.login(logged);
-        if(logged.getPermissions() == SystemRoles.DEVELOPER){
-            new DeveloperMainWindow();
-        } else {
-            new TenantMainWindow();
-        }
+        new ServerMainWindow();
     }
 }

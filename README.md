@@ -1,10 +1,10 @@
-# PJWSTK_GUI_PROJ_2020_SEM2_s20912
+# PJWSTK_SKJ_MICROTORRENT
 
 ### Build a .jar package
 
 - Resolve maven dependences `mvn dependency:resolve`
 - Build package `mvn clean compile package`
-- Application will be located in `target/PJWSTK_GUI_PROJ_2020_SEM2-1.0-SNAPSHOT-jar-with-dependencies.jar`
+- Application will be located in `target/PJWSTK_SKJ_MICROTORRENT-1.0-SNAPSHOT-jar-with-dependencies.jar`
 
 I also provided my `.idea` files - then just run the `App` script.
 

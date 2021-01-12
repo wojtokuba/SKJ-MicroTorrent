@@ -5,8 +5,6 @@ import com.googlecode.lanterna.gui2.GridLayout;
 import com.googlecode.lanterna.gui2.Label;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.TextBox;
-import pl.wojtokuba.proj.View.Developer.DeveloperEstatesNewWindow;
-import pl.wojtokuba.proj.ViewModel.Developer.DeveloperEstatesNewViewModel;
 
 public class TextBoxFormGroup extends Panel {
     TextBox textBox = new TextBox();

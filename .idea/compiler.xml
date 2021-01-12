@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="PJWSTK_GUI_PROJ_2020_SEM2" />
+        <module name="PJWSTK_DEVSOFT_GUI" />
       </profile>
     </annotationProcessing>
   </component>

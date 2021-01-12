@@ -1,9 +1,6 @@
 package pl.wojtokuba.proj.Utils;
 
 import pl.wojtokuba.proj.Commands.BaseCommand;
-import pl.wojtokuba.proj.Commands.CheckRentialDatesCommand;
-import pl.wojtokuba.proj.Commands.ExecuteExmissionCommand;
-import pl.wojtokuba.proj.Commands.RemoveFilesForProlongatedCommand;
 
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -33,9 +30,9 @@ public class TimeLapseManager implements Runnable{
         appDate = new Date();
         LoggerUtil.getLogger().fine("Setting date to: " + dateFormat.format(appDate));
         //queue checking rential dates
-        queue.add(new CheckRentialDatesCommand());
-        queue.add(new ExecuteExmissionCommand());
-        queue.add(new RemoveFilesForProlongatedCommand());
+//        queue.add(new CheckRentialDatesCommand());
+//        queue.add(new ExecuteExmissionCommand());
+//        queue.add(new RemoveFilesForProlongatedCommand());
         timeThread.start();
     }
     public void end(){

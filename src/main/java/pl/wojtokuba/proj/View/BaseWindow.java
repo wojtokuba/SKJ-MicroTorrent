@@ -1,7 +1,6 @@
 package pl.wojtokuba.proj.View;
 
 import com.googlecode.lanterna.gui2.*;
-import pl.wojtokuba.proj.Components.AppInfoNavbar;
 import pl.wojtokuba.proj.Utils.MainViewManager;
 import pl.wojtokuba.proj.Utils.SimpleInjector;
 
@@ -43,7 +42,6 @@ public abstract class BaseWindow extends AbstractWindow implements WindowRendera
         contentPanel = new Panel(new GridLayout(10));
         borderLayout = (GridLayout) contentPanel.getLayoutManager();
         setComponent(contentPanel);
-        contentPanel.addComponent(new AppInfoNavbar());
         contentPanel.addComponent(new Separator(Direction.HORIZONTAL)
                 .setLayoutData(GridLayout.createLayoutData(
                         GridLayout.Alignment.FILL,

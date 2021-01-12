@@ -17,7 +17,7 @@ public class MainViewManager {
     public MainViewManager(){
         try {
             defaultTerminalFactory = new DefaultTerminalFactory();
-            defaultTerminalFactory.setInitialTerminalSize(new TerminalSize(200,60));
+            defaultTerminalFactory.setInitialTerminalSize(new TerminalSize(100,30));
             screen = defaultTerminalFactory.createScreen();
             windowBasedTextGUI = new MultiWindowTextGUI(screen);
             screen.startScreen();

@@ -1,27 +1,45 @@
 package pl.wojtokuba.proj.Model;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class File {
-    private static final AtomicInteger count = new AtomicInteger(0);
+    String name;
+    String extension;
+    String checksum;
+    String absolutePath;
+    double size;
+    java.io.File file; //in MB
 
-    private final int id;
-    private Rential rential;
-
-    public File(){
-        this.id = count.incrementAndGet();
+    public File(String name, String extension, String checksum, String absolutePath, java.io.File file){
+        this.name = name;
+        this.extension = extension;
+        this.checksum = checksum;
+        this.absolutePath = absolutePath;
+        this.file = file;
+        this.size = file.length() / (1024*1024) ;
     }
 
-    public int getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public Rential getRential() {
-        return rential;
+    public String getExtension() {
+        return extension;
     }
 
-    public File setRential(Rential rential) {
-        this.rential = rential;
-        return this;
+    public String getChecksum() {
+        return checksum;
     }
+
+    public String getAbsolutePath() {
+        return absolutePath;
+    }
+
+
+    public java.io.File getFile() {
+        return file;
+    }
+
+    public double getSize() {
+        return size;
+    }
+
 }

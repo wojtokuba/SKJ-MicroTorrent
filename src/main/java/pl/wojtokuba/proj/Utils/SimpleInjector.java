@@ -1,6 +1,7 @@
 package pl.wojtokuba.proj.Utils;
 
 import pl.wojtokuba.proj.Storage.*;
+import pl.wojtokuba.proj.Utils.Net.TCPServer;
 
 import java.util.HashMap;
 import java.util.logging.Logger;
@@ -14,14 +15,9 @@ public class SimpleInjector {
         if(_isInitialized)
             return;
         Object[] objects = new Object[]{
-                new TimeLapseManager(),
                 new MainViewManager(),
-                new RentialStorage(),
-                new UserStorage(),
-                new SessionStorage(),
-                new EstateStorage(),
-                new BlockStorage(),
-                new FlatStorage(),
+                new ConfigStorage(),
+                new TCPServer(),
         };
         for (int i = 0; i < objects.length; ++i) {
             argClasses.put(objects[i].getClass().getName(), objects[i]);
