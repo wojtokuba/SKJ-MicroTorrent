@@ -42,4 +42,15 @@ public class File {
         return size;
     }
 
+    @Override
+    public String toString() {
+        return "File{" +
+                "name='" + name + '\'' +
+                ", extension='" + extension + '\'' +
+                ", checksum='" + checksum + '\'' +
+                ", absolutePath='" + absolutePath + '\'' +
+                ", size=" + size +
+                ", file=" + file +
+                '}';
+    }
 }

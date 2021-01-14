@@ -1,7 +1,8 @@
 package pl.wojtokuba.proj.Utils;
 
 import pl.wojtokuba.proj.Storage.*;
-import pl.wojtokuba.proj.Utils.Net.TCPServer;
+import pl.wojtokuba.proj.Utils.Net.Server.BroadcasterRunnable;
+import pl.wojtokuba.proj.Utils.Net.Server.TCPServer;
 
 import java.util.HashMap;
 import java.util.logging.Logger;
@@ -17,7 +18,9 @@ public class SimpleInjector {
         Object[] objects = new Object[]{
                 new MainViewManager(),
                 new ConfigStorage(),
+                new SharedFilesStorage(),
                 new TCPServer(),
+                new BroadcasterRunnable(),
         };
         for (int i = 0; i < objects.length; ++i) {
             argClasses.put(objects[i].getClass().getName(), objects[i]);

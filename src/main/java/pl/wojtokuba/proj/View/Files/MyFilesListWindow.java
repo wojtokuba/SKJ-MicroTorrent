@@ -32,17 +32,18 @@ public class MyFilesListWindow extends ServerMainWindow implements WindowRendera
                 new Separator(Direction.HORIZONTAL)
                         .setLayoutData(
                                 GridLayout.createHorizontallyFilledLayoutData(10)));
-        CustomTable<String> table = new CustomTable<>("ID", "Nazwa pliku", "Rozmiar (MB)", "Rozszerzenie", "Hash (8 znaków)");
-        myFilesListViewModel.getFiles();
+        CustomTable<String> table = new CustomTable<>("ID", "Nazwa pliku", "Rozmiar (MB)", "Rozszerzenie", "Hash (8 znaków)", "Udostępniony");
         int i = 0;
         for (File file : myFilesListViewModel.getFiles()) {
+            System.out.println(myFilesListViewModel.isFileShared(file));
             table.getTableModel()
                     .addRow(
                             String.valueOf(++i),
                             file.getName(),
                             String.valueOf(file.getSize()),
                             file.getExtension(),
-                            file.getChecksum().substring(0, Math.min(file.getChecksum().length(), 8))
+                            file.getChecksum().substring(0, Math.min(file.getChecksum().length(), 8)),
+                            myFilesListViewModel.isFileShared(file) ? "Tak" : "Nie"
                     );
         }
 

@@ -1,6 +1,7 @@
 package pl.wojtokuba.proj.ViewModel.Files;
 import pl.wojtokuba.proj.Exceptions.FilesystemException;
 import pl.wojtokuba.proj.Model.File;
+import pl.wojtokuba.proj.Storage.SharedFilesStorage;
 import pl.wojtokuba.proj.Utils.Filesystem;
 import pl.wojtokuba.proj.Utils.SimpleInjector;
 import pl.wojtokuba.proj.View.Files.MyFilesListWindow;
@@ -21,5 +22,10 @@ public class MyFilesListViewModel {
         } catch (FilesystemException e){
             return new ArrayList<>();
         }
+    }
+
+    public boolean isFileShared(File file){
+        SharedFilesStorage sharedFilesStorage = (SharedFilesStorage) SimpleInjector.resolveObject(SharedFilesStorage.class);
+        return sharedFilesStorage.contains(file);
     }
 }

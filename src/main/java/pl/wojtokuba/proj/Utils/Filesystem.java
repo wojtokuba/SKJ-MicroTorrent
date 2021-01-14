@@ -50,6 +50,10 @@ public class Filesystem {
         return users_home.replace("\\", "/"); // to support all platforms.
     }
 
+    public static String getUserDirectoryPath(){
+        return getUploadsDir().getAbsolutePath();
+    }
+
     public static String getFileHash(java.io.File file){
         try {
             byte[] b = Files.readAllBytes(Paths.get(file.getAbsolutePath()));

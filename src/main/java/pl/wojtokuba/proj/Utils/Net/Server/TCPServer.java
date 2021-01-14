@@ -1,4 +1,4 @@
-package pl.wojtokuba.proj.Utils.Net;
+package pl.wojtokuba.proj.Utils.Net.Server;
 
 import pl.wojtokuba.proj.Storage.ConfigStorage;
 import pl.wojtokuba.proj.Utils.LoggerUtil;
@@ -9,7 +9,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.logging.Level;
 
 //TCP threaded pool server from http://tutorials.jenkov.com/java-multithreaded-servers/thread-pooled-server.html
 public class TCPServer implements Runnable{
@@ -71,5 +70,9 @@ public class TCPServer implements Runnable{
             LoggerUtil.getLogger().severe("Cannot open port"+this.serverPort);
             throw new RuntimeException("Cannot open port"+this.serverPort, e);
         }
+    }
+
+    public int getServerListenPort(){
+        return this.serverPort;
     }
 }

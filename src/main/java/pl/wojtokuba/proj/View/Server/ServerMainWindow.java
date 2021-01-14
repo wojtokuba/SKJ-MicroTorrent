@@ -5,6 +5,7 @@ import com.googlecode.lanterna.gui2.menu.MenuBar;
 import pl.wojtokuba.proj.Commands.AppExit;
 import pl.wojtokuba.proj.Commands.Logout;
 import pl.wojtokuba.proj.Commands.Server.OpenMyFileList;
+import pl.wojtokuba.proj.Commands.Server.ShareFile;
 import pl.wojtokuba.proj.Components.NavBarMenu;
 import pl.wojtokuba.proj.View.BaseWindow;
 import pl.wojtokuba.proj.ViewModel.Server.ServerMainViewModel;
@@ -35,7 +36,7 @@ public class ServerMainWindow extends BaseWindow {
         MenuBar menuBar = new MenuBar();
         new NavBarMenu("Moje pliki",
                 new HashMap<String, Runnable>(){{
-                    put("Lista", new OpenMyFileList());
+                    put("Lista plików", new OpenMyFileList());
 //                    put("Ścieżki systemowe", new OpenMyEstates());
                 }},
                 menuBar
@@ -43,7 +44,7 @@ public class ServerMainWindow extends BaseWindow {
         new NavBarMenu("Wymiana plików",
                 new HashMap<String, Runnable>(){{
 //                    put("Pobierz plik", new OpenMyBlocks());
-//                    put("Udostępniaj plik", new CreateNewBlock());
+                    put("Udostępniaj plik", new ShareFile());
                 }},
                 menuBar
         );

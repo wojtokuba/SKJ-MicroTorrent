@@ -1,4 +1,4 @@
-package pl.wojtokuba.proj.Utils.Net;
+package pl.wojtokuba.proj.Utils.Net.Server;
 
 import pl.wojtokuba.proj.Utils.LoggerUtil;
 import pl.wojtokuba.proj.Utils.Net.Server.Preconnect;

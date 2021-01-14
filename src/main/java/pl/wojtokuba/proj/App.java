@@ -1,7 +1,8 @@
 package pl.wojtokuba.proj;
 
 import pl.wojtokuba.proj.Utils.*;
-import pl.wojtokuba.proj.Utils.Net.TCPServer;
+import pl.wojtokuba.proj.Utils.Net.Server.BroadcasterRunnable;
+import pl.wojtokuba.proj.Utils.Net.Server.TCPServer;
 import pl.wojtokuba.proj.View.AppWorkModeWindow;
 
 import java.util.logging.Level;
@@ -26,6 +27,7 @@ public class App {
 
     public static void prepareToStop(){
         TCPServer tcpServer = (TCPServer) SimpleInjector.resolveObject(TCPServer.class);
+        BroadcasterRunnable.prepareToStop();
         if(tcpServer != null){
             tcpServer.setStopped(true);
         }

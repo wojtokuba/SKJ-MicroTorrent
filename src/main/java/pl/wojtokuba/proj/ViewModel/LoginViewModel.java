@@ -2,7 +2,7 @@ package pl.wojtokuba.proj.ViewModel;
 
 import pl.wojtokuba.proj.Storage.ConfigStorage;
 import pl.wojtokuba.proj.Utils.BaseAppConfigs;
-import pl.wojtokuba.proj.Utils.Net.TCPServer;
+import pl.wojtokuba.proj.Utils.Net.Server.TCPServer;
 import pl.wojtokuba.proj.Utils.SimpleInjector;
 import pl.wojtokuba.proj.View.AppWorkModeWindow;
 import pl.wojtokuba.proj.View.Server.ServerMainWindow;
