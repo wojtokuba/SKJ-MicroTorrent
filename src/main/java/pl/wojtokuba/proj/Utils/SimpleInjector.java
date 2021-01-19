@@ -21,6 +21,7 @@ public class SimpleInjector {
                 new SharedFilesStorage(),
                 new TCPServer(),
                 new BroadcasterRunnable(),
+                new ForeignHostsStorage(),
         };
         for (int i = 0; i < objects.length; ++i) {
             argClasses.put(objects[i].getClass().getName(), objects[i]);

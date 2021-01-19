@@ -13,12 +13,14 @@ public class ConfigStorage {
         TRANSMISSION_PROTOCOL,
         FILES_LOCATION,
         MAX_CLIENTS,
+        CLIENT_NUMBER,
     }
 
     public ConfigStorage(){
         //set default file storage location
         String os = System.getProperty("os.name").toLowerCase();
-        int clientNumber = (int)(1 + (Math.random() * (100 - 1)));
+        byte clientNumber = (byte)(1 + (Math.random() * (100 - 1)));
+        set(SettingValues.CLIENT_NUMBER, String.valueOf(clientNumber));
         set(SettingValues.MAX_CLIENTS, "300");
         if(os.contains("win")){
             set(SettingValues.FILES_LOCATION, "D:\\TORrent_"+clientNumber);

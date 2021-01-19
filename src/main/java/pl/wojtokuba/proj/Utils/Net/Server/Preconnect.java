@@ -7,6 +7,8 @@ import pl.wojtokuba.proj.Utils.SimpleInjector;
 import sun.nio.ch.Net;
 import sun.security.krb5.Config;
 
+import java.io.DataInput;
+import java.io.DataInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -16,7 +18,6 @@ public class Preconnect {
 
         switch (com){
             case Communicates.EHLO:
-                System.out.println("TYP EHLO");
                 runEHLO(input, output);
                 break;
             case Communicates.FILE:
@@ -26,18 +27,14 @@ public class Preconnect {
     }
 
     public static void runEHLO(InputStream input, OutputStream output) throws NetworkException {
-        ConfigStorage configStorage = (ConfigStorage) SimpleInjector.resolveObject(ConfigStorage.class);
         try {
-            int ch1 = input.read();
-            int ch2 = input.read();
-            if ((ch1 | ch2) < 0)
-                throw new NetworkException();
-            int userId = (ch1 << 8) + (ch2 << 0);
-            System.out.println(userId);
+            ConfigStorage configStorage = (ConfigStorage) SimpleInjector.resolveObject(ConfigStorage.class);
             output.write(Communicates.EHLO);
-            output.write(Communicates.EHLO);
+            output.write(Byte.parseByte(configStorage.get(ConfigStorage.SettingValues.CLIENT_NUMBER)));
         } catch (Exception e){
+            e.getStackTrace();
             throw new NetworkException();
         }
     }
+
 }

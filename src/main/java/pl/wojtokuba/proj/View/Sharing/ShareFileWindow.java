@@ -42,7 +42,7 @@ public class ShareFileWindow extends ServerMainWindow implements WindowRenderabl
         }
         localPanel.removeAllComponents();
         shareFileViewModel = new ShareFileViewModel(this);
-        localPanel.addComponent(new Label("Zaznacz pliki, które chcesz udostępniać lub odznacz aby zakończyć.")
+        localPanel.addComponent(new Label("Wprowadź ip oraz port hostów, których znasz")
                 .addStyle(SGR.BOLD)
                 .setForegroundColor(TextColor.ANSI.BLUE)
                 .setLayoutData(GridLayout.createLayoutData(
@@ -99,7 +99,7 @@ public class ShareFileWindow extends ServerMainWindow implements WindowRenderabl
                     )));
         } else {
             localPanel.addComponent(
-                new Button("Odśwież", shareFileViewModel::refresh).setLayoutData(
+                new Button("Dodaj do listy", shareFileViewModel::refresh).setLayoutData(
                     GridLayout.createLayoutData(
                         GridLayout.Alignment.CENTER,
                         GridLayout.Alignment.CENTER,

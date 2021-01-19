@@ -5,6 +5,7 @@ import pl.wojtokuba.proj.Utils.LoggerUtil;
 import pl.wojtokuba.proj.Utils.SimpleInjector;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
@@ -39,6 +40,7 @@ public class TCPServer implements Runnable{
             this.runningThread = Thread.currentThread();
         }
         openServerSocket();
+
         while(!isStopped()){
             Socket clientSocket = null;
             try {
@@ -60,19 +62,31 @@ public class TCPServer implements Runnable{
         }
     }
 
-    private void openServerSocket() {
+    private synchronized void openServerSocket() {
         try {
             this.serverSocket = new ServerSocket(this.serverPort);
             LoggerUtil.getLogger().fine("Started listening on: 0.0.0.0:"+this.serverPort);
-        } catch (IOException e) {
+        } catch (Exception e) {
             this.serverPort++;
-            openServerSocket();
-            LoggerUtil.getLogger().severe("Cannot open port"+this.serverPort);
-            throw new RuntimeException("Cannot open port"+this.serverPort, e);
+            if(this.serverPort < 11000){
+                openServerSocket();
+            } else {
+                LoggerUtil.getLogger().severe("Cannot open port"+this.serverPort);
+                throw new RuntimeException("Cannot open port"+this.serverPort, e);
+            }
         }
     }
 
     public int getServerListenPort(){
         return this.serverPort;
+    }
+
+    public String getHostPort(){
+        try {
+            String ip = InetAddress.getLocalHost().getHostAddress();
+            return ip+":"+this.serverPort;
+        } catch (Exception e){
+            return "nieokreslony:"+this.serverPort;
+        }
     }
 }

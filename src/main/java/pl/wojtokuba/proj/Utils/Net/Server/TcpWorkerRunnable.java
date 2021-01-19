@@ -23,7 +23,6 @@ public class TcpWorkerRunnable implements Runnable{
             InputStream input  = clientSocket.getInputStream();
             OutputStream output = clientSocket.getOutputStream();
             long time = System.currentTimeMillis();
-            int ch;
             try {
                 Preconnect.readCommunication((byte) input.read(), input, output);
             } catch (Exception e){

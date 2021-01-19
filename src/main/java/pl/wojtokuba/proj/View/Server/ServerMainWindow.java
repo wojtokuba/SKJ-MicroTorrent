@@ -6,6 +6,7 @@ import pl.wojtokuba.proj.Commands.AppExit;
 import pl.wojtokuba.proj.Commands.Logout;
 import pl.wojtokuba.proj.Commands.Server.OpenMyFileList;
 import pl.wojtokuba.proj.Commands.Server.ShareFile;
+import pl.wojtokuba.proj.Commands.Sharing.ForeignClients;
 import pl.wojtokuba.proj.Components.NavBarMenu;
 import pl.wojtokuba.proj.View.BaseWindow;
 import pl.wojtokuba.proj.ViewModel.Server.ServerMainViewModel;
@@ -43,6 +44,7 @@ public class ServerMainWindow extends BaseWindow {
         );
         new NavBarMenu("Wymiana plików",
                 new HashMap<String, Runnable>(){{
+                    put("Inni klienci", new ForeignClients());
 //                    put("Pobierz plik", new OpenMyBlocks());
                     put("Udostępniaj plik", new ShareFile());
                 }},
