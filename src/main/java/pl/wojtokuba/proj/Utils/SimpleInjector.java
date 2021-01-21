@@ -23,8 +23,8 @@ public class SimpleInjector {
                 new BroadcasterRunnable(),
                 new ForeignHostsStorage(),
         };
-        for (int i = 0; i < objects.length; ++i) {
-            argClasses.put(objects[i].getClass().getName(), objects[i]);
+        for (Object object : objects) {
+            argClasses.put(object.getClass().getName(), object);
         }
         _isInitialized = true;
     }

@@ -1,12 +1,14 @@
 package pl.wojtokuba.proj.ViewModel.Sharing;
 import pl.wojtokuba.proj.Components.CheckBoxFormGroup;
 import pl.wojtokuba.proj.Exceptions.FilesystemException;
+import pl.wojtokuba.proj.Exceptions.NetworkException;
 import pl.wojtokuba.proj.Model.File;
 import pl.wojtokuba.proj.Model.InnerHost;
 import pl.wojtokuba.proj.Storage.ConfigStorage;
 import pl.wojtokuba.proj.Storage.ForeignHostsStorage;
 import pl.wojtokuba.proj.Storage.SharedFilesStorage;
 import pl.wojtokuba.proj.Utils.Filesystem;
+import pl.wojtokuba.proj.Utils.Net.Client.HelloService;
 import pl.wojtokuba.proj.Utils.Net.Communicates;
 import pl.wojtokuba.proj.Utils.Net.Server.TCPServer;
 import pl.wojtokuba.proj.Utils.Net.TCPClient;
@@ -52,26 +54,15 @@ public class ForeignClientsViewModel {
         }
         try {
             String[] hostPort = strHostPort.split(":");
-            TCPClient tcpCli = new TCPClient(hostPort[0], Integer.parseInt(hostPort[1]));
-            byte[] buffer = new byte[2];
             byte userId = Byte.parseByte(configStorage.get(ConfigStorage.SettingValues.CLIENT_NUMBER));
-            buffer[0] = Communicates.EHLO;
-            buffer[1] = userId;
-
-            BufferedReader bufRead = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(buffer)));
-            InputStream bufOut;
-            try {
-                bufOut = tcpCli.sendAndGetResponse(bufRead);
-            } catch (Exception e){
-                foreignClientsWindow.setCheckingFailure("Podany host nie odpowiedział. ");
+            int remoteId;
+            try{
+                remoteId = HelloService.sendHelloAndDiscoverHost(userId, hostPort[0], Integer.parseInt(hostPort[1]));
+            } catch (NetworkException e){
+                foreignClientsWindow.setCheckingFailure(e.getMessage());
                 return;
             }
 
-            if(bufOut.read() != Communicates.EHLO){
-                foreignClientsWindow.setCheckingFailure("Otrzymany pakiet jest nieprawidłowy.");
-                return;
-            }
-            int remoteId = bufOut.read();
             foreignHostsStorage.push(new InnerHost(Integer.toString(remoteId),hostPort[0], Integer.parseInt(hostPort[1])));
             foreignClientsWindow.setCheckingClients(false);
             foreignClientsWindow.render();
