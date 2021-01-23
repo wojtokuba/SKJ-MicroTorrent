@@ -38,6 +38,16 @@ public class SharedFilesStorage {
         return null;
     }
 
+    public File findOneByShortHash(String hash){
+        Collection<File> result = new ArrayList<>();
+        for(File file : this.files.values()){
+            if(file.getChecksum().substring(0,5).equals(hash)){
+               return file;
+            }
+        }
+        return null;
+    }
+
     public boolean contains(File srcFile){
         for(File file : this.files.values()){
             if(file.getChecksum().equals(srcFile.getChecksum())){

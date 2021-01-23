@@ -32,7 +32,7 @@ public class TCPClient {
             while((tmp = input.readLine()) != null){
                 stream.writeBytes(tmp);
             }
-
+            stream.writeBytes("\r\n");
             return this.socket.getInputStream();
         } catch (Exception e){
             throw new NetworkException();

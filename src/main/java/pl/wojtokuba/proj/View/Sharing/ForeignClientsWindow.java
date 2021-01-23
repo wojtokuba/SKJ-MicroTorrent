@@ -28,9 +28,10 @@ public class ForeignClientsWindow extends ServerMainWindow implements WindowRend
     boolean isCheckingClients = false;
     boolean checkFailure = false;
     String errorMessage = null;
-
+    
     @Override
     public void render() {
+        foreignClientsViewModel = new ForeignClientsViewModel(this);
         if(localPanel == null){
             localPanel = new Panel(new GridLayout(10));
             contentPanel.addComponent(localPanel.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(10)));
@@ -63,7 +64,6 @@ public class ForeignClientsWindow extends ServerMainWindow implements WindowRend
             errorMessage = null;
         }
 
-        foreignClientsViewModel = new ForeignClientsViewModel(this);
         localPanel.addComponent(new Label("Lista hostów z którymi będzie następowała wymiana")
                 .addStyle(SGR.BOLD)
                 .setForegroundColor(TextColor.ANSI.BLUE)
